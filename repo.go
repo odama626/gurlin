@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/base64"
-	"strings"
 	"time"
 )
 
@@ -10,6 +8,7 @@ import (
 
 var datastore map[string]Redirect
 var reverseLookup map[string]*Redirect
+var curIttr int
 
 func init() {
 	// flatTransform := func(s string) []string { return []string{} }
@@ -21,6 +20,7 @@ func init() {
 	// })
 	datastore = make(map[string]Redirect)
 	reverseLookup = make(map[string]*Redirect)
+	curIttr = 0
 }
 
 func AddRedirect(r Redirect) {
@@ -44,12 +44,7 @@ func GetAvailableSrc(dest string) string {
 	if exists {
 		return rev.Src
 	}
-
-	src := base64.StdEncoding.EncodeToString([]byte(dest))
-	src = strings.Replace(src, "=", "", -1)[:3]
-	for i := 0; !SrcAvailable(src) || i > 10; i++ {
-		src = base64.StdEncoding.EncodeToString([]byte(src))
-		src = strings.Replace(src, "=", "", -1)[:3]
-	}
-	return src
+	avail := ItoS(curIttr)
+	curIttr++
+	return avail
 }

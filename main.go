@@ -9,6 +9,11 @@ import (
 func main() {
 	router := NewRouter()
 
+	// for i := 0; i < 65*3; i++ {
+	// 	fmt.Println(ItoS(i))
+	// }
+	// fmt.Println()
+
 	AddRedirect(Redirect{
 		"abc",
 		"https://google.com",

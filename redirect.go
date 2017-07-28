@@ -6,7 +6,9 @@ import (
 	"time"
 )
 
-// Valid URI chars = ALPHA / DIGIT / "-" / "." / "_" / "~"
+// Valid URI chars = ALPHA / DIGIT / "-" / "_" / "~"
+
+// ascii 45 48-57 65-90 95 97-122  126
 
 type Redirect struct {
 	Src     string    `json:"src"`

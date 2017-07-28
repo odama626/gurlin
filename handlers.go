@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -48,14 +49,17 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	case to == "":
 		msg = MakeErr("Destination address required, did you forget to add 'to:'?")
 	case from != "":
-		if !SrcAvailable(from) {
+		to = FixDestination(to)
+		from = strings.Replace(from, "/", "", -1)
+		if re, ok := GetRedirect(from); !ok && to != re.Dest {
 			msg = MakeErr(fmt.Sprintf("%v taken", from))
 		} else {
-			to = FixDestination(to)
+
 			defer AddRedirect(Redirect{Src: from, Dest: to})
 			msg = MakeMsg(fmt.Sprintf("%v -> %v", from, to))
 		}
 	default:
+		to = FixDestination(to)
 		from = GetAvailableSrc(to)
 		defer AddRedirect(Redirect{Src: from, Dest: to})
 		msg = MakeMsg(fmt.Sprintf("%v -> %v", from, to))
