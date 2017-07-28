@@ -9,6 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Bounce is http server root, redirects if path is found 404 otherwise
 func Bounce(w http.ResponseWriter, r *http.Request) {
 	src := mux.Vars(r)["src"]
 	redirect, err := GetRedirect(src)
@@ -19,10 +20,12 @@ func Bounce(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Index is the index of the api path
 func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Welcome!")
 }
 
+// Available is /{apiRoot}/available/{src} and returns Message indicating whether redirect path is used or not
 func Available(w http.ResponseWriter, r *http.Request) {
 	src := mux.Vars(r)["src"]
 	err := SrcAvailable(src)

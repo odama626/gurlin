@@ -21,6 +21,7 @@ func mapChar(i int) byte {
 
 const base = 64
 
+// ItoS converts an integer into a base64 string with as few characters as possible
 func ItoS(i int) string {
 	var c int
 	var out []byte

@@ -15,6 +15,7 @@ func (m Message) String() string {
 	return fmt.Sprintf("Error: %v Message: %v, timestamp: %v", m.Err, m.Message, m.TimeStamp)
 }
 
+// MakeMsg returns a Message with all defaults set except Message.Message
 func MakeMsg(msg string) Message {
 	return Message{
 		false,
@@ -23,6 +24,7 @@ func MakeMsg(msg string) Message {
 	}
 }
 
+// MakeErr is the same as MakeMsg except Message.Err = true
 func MakeErr(msg string) Message {
 	return Message{
 		true,

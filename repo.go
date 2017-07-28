@@ -2,22 +2,17 @@ package main
 
 import (
 	"time"
+	//"github.com/garyburd/redigo/redis"
 )
 
-// var datastore *diskv.Diskv
+// var redisPool
 
 var datastore map[string]Redirect
 var reverseLookup map[string]*Redirect
 var curIttr int
 
 func init() {
-	// flatTransform := func(s string) []string { return []string{} }
 
-	// datastore = diskv.New(diskv.Options{
-	// 	BasePath:     "data",
-	// 	Transform:    flatTransform,
-	// 	CacheSizeMax: 1024 * 1024,
-	// })
 	datastore = make(map[string]Redirect)
 	reverseLookup = make(map[string]*Redirect)
 	curIttr = 0
