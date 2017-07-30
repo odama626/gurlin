@@ -12,7 +12,6 @@ var reverseLookup map[string]*Redirect
 var curIttr int
 
 func init() {
-
 	datastore = make(map[string]Redirect)
 	reverseLookup = make(map[string]*Redirect)
 	curIttr = 0
@@ -41,5 +40,10 @@ func GetAvailableSrc(dest string) string {
 	}
 	avail := ItoS(curIttr)
 	curIttr++
+
+	for !SrcAvailable(avail) {
+		avail = ItoS(curIttr)
+		curIttr++
+	}
 	return avail
 }
