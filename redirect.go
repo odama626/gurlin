@@ -28,3 +28,9 @@ func FixDestination(dest string) string {
 }
 
 type Redirects []Redirect
+
+func MakeRedirect(r Redirect) Redirect {
+	r.Active = true
+	r.Created = time.Now()
+	return r
+}

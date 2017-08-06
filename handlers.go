@@ -14,7 +14,7 @@ func Bounce(w http.ResponseWriter, r *http.Request) {
 	src := mux.Vars(r)["src"]
 	redirect, err := GetRedirect(src)
 	if err {
-		fmt.Fprintf(w, "Not found")
+		fmt.Fprintf(w, "¯\\_(ツ)_/¯")
 	} else {
 		http.Redirect(w, r, redirect.Dest, 301)
 	}
